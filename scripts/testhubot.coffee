@@ -15,7 +15,7 @@
 module.exports = (robot) ->
 
   user = {}
-  user.room = process.env.HUBOT_DEPLOY_ROOM || '#tz_nide_bot_test'
+  user.room = process.env.HUBOT_DEPLOY_ROOM || '#tz_nide_gossip'
   #user.user = 'leechwin'
   user.type = 'groupchat'
 
