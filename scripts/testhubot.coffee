@@ -140,7 +140,7 @@ module.exports = (robot) ->
   CronJob = require('cron').CronJob
   tz = 'Asia/Seoul'
   new CronJob('0 30 11 * * 1-5', workdaysLunch, null, true, tz)
-  new CronJob('0 0 18 * * 1-5', workdaysQuit, null, true, tz)
+  #new CronJob('0 0 18 * * 1-5', workdaysQuit, null, true, tz)
   new CronJob('0 50 10 * * 1-5', ->
     workdaysScrum('1019호')
   , null, true, tz)
