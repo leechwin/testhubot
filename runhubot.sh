@@ -1,8 +1,8 @@
 #!/bin/sh
 
 PORT=5033
-HUBOT_HOME="/home/sdk-cloud-2/wsdkbot"
-HUBOT_SLACK_TOKEN=xoxb-4018514085-eMvHAQVAMpDxdzCCcAyvEaD5
+HUBOT_HOME="/c/leechwin/Github/testhubot"
+HUBOT_SLACK_TOKEN=xoxb-18173704964-TrhGXUXHjHbx2JDrqNKiPVet
 HUBOT_URL="127.0.0.1:$PORT"
 DAEMON="$HUBOT_HOME/bin/hubot"
 DAEMON_OPTS=" -a slack"

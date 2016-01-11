@@ -1,4 +1,4 @@
-# Description:
+ # Description:
 #   Example scripts for you to examine and try out.
 #
 # Commands:
@@ -15,8 +15,8 @@
 module.exports = (robot) ->
 
   user = {}
-  user.room = process.env.HUBOT_DEPLOY_ROOM || '#general'
-  #user.user = 'mariah'
+  user.room = process.env.HUBOT_DEPLOY_ROOM || '#tz_nide_bot_test'
+  #user.user = 'leechwin'
   user.type = 'groupchat'
 
   jf = require("jsonfile")
@@ -25,7 +25,7 @@ module.exports = (robot) ->
   APP_KEY = '4bc92446-d191-39a5-936b-0e73f2c64fa5'
 
   workdaysLunch = ->
-    msg = '#Hubot 알림# 곧 점심 시간입니다. 챙겨야 할 것: 식권, 자기 방과 옆 방의 동료, 비더레^^'
+    msg = '#NIDE 알림# 곧 점심 시간입니다. 챙겨야 할 것: 식권과 팀원'
     #robot.logger.info msg
     robot.send user, msg
 
@@ -60,7 +60,7 @@ module.exports = (robot) ->
   workdaysQuit = ->
     getCityAirByAirKorea (cityAir) ->
       getWeatherByPlanet cityAir, (text) ->
-        msg = "#Hubot 알림# 하루 업무를 마무리할 시간이네요.\n" + text
+        msg = "#NIDE 알림# 하루 업무를 마무리할 시간이네요.\n" + text
         robot.send user, msg
 
   getVerboseWeatherByPlanet = (cityAir, callback) ->
@@ -125,7 +125,7 @@ module.exports = (robot) ->
               callback msg
 
   workdaysScrum = (place) ->
-    msg = "#Hubot 알림# 10분 뒤 Daily Scrum 시작(#{place})입니다. 각자 현황판 업데이트 후 정시에 체크인해 주세요."
+    msg = "#NIDE 알림# 10분 뒤 Daily Scrum 시작(#{place})입니다. 정시에 체크인해 주세요."
     robot.send user, msg
 
   robot.logger.info "Initializing CronJob... #{user.room}"
@@ -139,23 +139,16 @@ module.exports = (robot) ->
 
   CronJob = require('cron').CronJob
   tz = 'Asia/Seoul'
-  new CronJob('0 15 11 * * 1-5', workdaysLunch, null, true, tz)
-  new CronJob('0 0 18 * * 1-5', workdaysQuit, null, true, tz)
-  new CronJob('0 20 10 * * 1', ->
-    workdaysScrum('월요일 1113호')
-  , null, true, tz)
-  new CronJob('0 20 10 * * 2-4', ->
-    workdaysScrum('화-목요일 11-2 회의실')
-  , null, true, tz)
-  new CronJob('0 50 12 * * 5', ->
-    workdaysScrum('금요일 11-2 회의실')
+#  new CronJob('0 15 11 * * 1-5', workdaysLunch, null, true, tz)
+#  new CronJob('0 0 18 * * 1-5', workdaysQuit, null, true, tz)
+  new CronJob('0 20 10 * * 1-5', ->
+    workdaysScrum('1019호')
   , null, true, tz)
 
   robot.respond //i, (msg) ->
-    msg.send "안녕하세요? Hubot입니다."
+    msg.send "안녕하세요? NIDE 형님들을 위한  BOT입니다."
 
   #robot.hear /장소 : (.*) 회의실/i, (msg) ->
-  #  msg.send "#Hubot 캠페인# 회의는 간결하게, 회의 시간에는 적극적이고 겸손하게 자신의 의견을 얘기해 주세요~"
 
   # "#회의"라는 단어가 포함되어 있으면 해당 메시지에서 시간("yyyy.mm.dd hour:min" 포맷만 인식)을 추출해 알람으로 등록
   robot.hear /#회의(.*)/i, (msg) ->
@@ -168,7 +161,7 @@ module.exports = (robot) ->
     cronDate.setMinutes cronDate.getMinutes() - beforeMin
     CronJob = require("cron").CronJob
     job = new CronJob(cronDate, ->
-      cronMsg = "#Hubot 알림# 회의 #{beforeMin}분 전입니다.\n" + fullMsg
+      cronMsg = "#NIDE 알림# 회의 #{beforeMin}분 전입니다.\n" + fullMsg
       robot.send user, cronMsg
       removeAlarmJob fullMsg
       @stop()
@@ -182,7 +175,7 @@ module.exports = (robot) ->
       else
         data.push obj
         writeJSONFile data
-    #msg.send "회의 알람이 등록되었습니다."
+    msg.send "회의 알람이 등록되었습니다."
 
   robot.respond /(^|\s)air|미세먼지(?=\s|$)/i, (msg) ->
     #help send message
@@ -228,7 +221,7 @@ module.exports = (robot) ->
           cronDate.setMinutes cronDate.getMinutes() - beforeMin
           CronJob = require("cron").CronJob
           job = new CronJob(cronDate, ->
-            cronMsg = "#Hubot 알림# 회의 #{beforeMin}분 전입니다.\n" + obj.msg
+            cronMsg = "#NIDE 알림# 회의 #{beforeMin}분 전입니다.\n" + obj.msg
             robot.send user, cronMsg
             removeAlarmJob obj.msg
             @stop()
