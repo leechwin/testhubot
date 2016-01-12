@@ -301,4 +301,3 @@ module.exports = (robot) ->
   # robot.respond /sleep it off/i, (msg) ->
   #   robot.brain.set 'totalSodas', 0
   #   robot.respond 'zzzzz'
->>>>>>> refs/remotes/cimfalab/master
