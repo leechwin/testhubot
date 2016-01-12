@@ -119,7 +119,7 @@ module.exports = (robot) ->
       res.end(msg)
 
   robot.respond //i, (msg) ->
-    msg.send "안녕하세요? Hubot입니다."
+    msg.send "안녕하세요? NIDE BOT입니다."
 
   #robot.hear /장소 : (.*) 회의실/i, (msg) ->
   #  msg.send "#Hubot 캠페인# 회의는 간결하게, 회의 시간에는 적극적이고 겸손하게 자신의 의견을 얘기해 주세요~"
