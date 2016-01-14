@@ -98,7 +98,7 @@ module.exports = (robot) ->
           if data.name in @failing
             build = "복구" # "was restored"
           else
-            build = "성공" # "succeeded"
+            build = "Merged" # "succeeded"
           console.log "send"
           robot.send envelope, "\"#{data.name}\"##{data.build.number}\n - 상태: #{build}\n - URL: #{buildUrl}\n - SCM: #{scm}"  if shouldNotify(envelope.notstrat, data, @failing)
           index = @failing.indexOf data.name
