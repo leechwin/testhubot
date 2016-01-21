@@ -28,7 +28,7 @@ module.exports = (robot) ->
   file = 'scripts/data.json'
 
   workdaysLunch = ->
-    msg = '#NIDE 알림# 곧 점심 시간입니다. 식권과 팀원을 챙겨주세요.'
+    msg = '#IDE 알림# 곧 점심 시간입니다. 식권과 팀원을 챙겨주세요.'
     #robot.logger.info msg
     robot.send user, msg
 
@@ -63,11 +63,11 @@ module.exports = (robot) ->
   workdaysQuit = ->
     getCityAirByAirKorea (cityAir) ->
       weather.getWeatherByPlanet cityAir, (text) ->
-        msg = "#NIDE 알림# 하루 업무를 마무리하고 퇴근 할 시간입니다.\n" + text
+        msg = "#IDE 알림# 하루 업무를 마무리하고 퇴근 할 시간입니다.\n" + text
         robot.send user, msg
 
   workdaysScrum = (place) ->
-    msg = "#NIDE 알림# 10분 뒤 Daily Scrum 시작(#{place})입니다. 정시에 체크인해 주세요."
+    msg = "#IDE 알림# 10분 뒤 Daily Scrum 시작(#{place})입니다. 정시에 체크인해 주세요."
     robot.send user, msg
 
   robot.logger.info "Initializing CronJob... #{user.room}"
@@ -83,10 +83,10 @@ module.exports = (robot) ->
   tz = 'Asia/Seoul'
   #new CronJob('0 0 18 * * 1-5', workdaysQuit, null, true, tz)
   new CronJob('0 20 11 * * 1-5', workdaysLunch, null, true, tz)
-  new CronJob('0 50 10 * * 3-5,1', ->
+  #new CronJob('0 50 10 * * 3-5,1', ->
     workdaysScrum('1019호')
   , null, true, tz)
-  new CronJob('0 20 13 * * 2', ->
+  #new CronJob('0 20 13 * * 2', ->
     workdaysScrum('1019호')
   , null, true, tz)
 
@@ -135,7 +135,7 @@ module.exports = (robot) ->
     cronDate.setMinutes cronDate.getMinutes() - beforeMin
     CronJob = require("cron").CronJob
     job = new CronJob(cronDate, ->
-      cronMsg = "#NIDE 알림# 회의 #{beforeMin}분 전입니다.\n" + fullMsg
+      cronMsg = "#IDE 알림# 회의 #{beforeMin}분 전입니다.\n" + fullMsg
       robot.send user, cronMsg
       removeAlarmJob fullMsg
       @stop()
@@ -200,7 +200,7 @@ module.exports = (robot) ->
           cronDate = new Date(obj.time)
           cronDate.setMinutes cronDate.getMinutes() - beforeMin
           job = new CronJob(cronDate, ->
-            cronMsg = "#NIDE 알림# 회의 #{beforeMin}분 전입니다.\n" + obj.msg
+            cronMsg = "#IDE 알림# 회의 #{beforeMin}분 전입니다.\n" + obj.msg
             robot.send user, cronMsg
             removeAlarmJob obj.msg
             @stop()
