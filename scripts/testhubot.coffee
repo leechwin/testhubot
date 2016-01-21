@@ -84,11 +84,11 @@ module.exports = (robot) ->
   #new CronJob('0 0 18 * * 1-5', workdaysQuit, null, true, tz)
   new CronJob('0 20 11 * * 1-5', workdaysLunch, null, true, tz)
   #new CronJob('0 50 10 * * 3-5,1', ->
-    workdaysScrum('1019호')
-  , null, true, tz)
+  #  workdaysScrum('1019호')
+  #, null, true, tz)
   #new CronJob('0 20 13 * * 2', ->
-    workdaysScrum('1019호')
-  , null, true, tz)
+  #  workdaysScrum('1019호')
+  #, null, true, tz)
 
   robot.router.post "/hubot/echo", (req, res) ->
     query = querystring.parse(url.parse(req.url).query)
