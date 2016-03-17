@@ -20,7 +20,7 @@ weather = require('./lib/weather')
 module.exports = (robot) ->
 
   user = {}
-  user.room = process.env.HUBOT_DEPLOY_ROOM || '#tide_general'
+  user.room = process.env.HUBOT_DEPLOY_ROOM || '#tide_notice'
   #user.user = 'leechwin'
   user.type = 'groupchat'
 
