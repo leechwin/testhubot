@@ -86,7 +86,7 @@ module.exports = (robot) ->
                 contents += "  - " + path + "\n"
 
           scm = "\n  [branch] #{data.build.scm.branch}\n  [commitId] #{data.build.scm.commit}\n - 변경 내용: #{contents}"
-        buildUrl = "http://172.21.100.108:8888/#{data.build.url}"
+        buildUrl = "http://172.21.110.90:8888/#{data.build.url}"
         if data.build.status == 'FAILURE'
           if data.name in @failing
             build = "여전히 실패" # "is still"
