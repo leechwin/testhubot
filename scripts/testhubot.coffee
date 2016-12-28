@@ -20,7 +20,7 @@ weather = require('./lib/weather')
 module.exports = (robot) ->
 
   user = {}
-  user.room = process.env.HUBOT_DEPLOY_ROOM || '#test'
+  user.room = process.env.HUBOT_DEPLOY_ROOM || '#notice'
   #user.user = 'leechwin'
   user.type = 'groupchat'
 
@@ -29,7 +29,6 @@ module.exports = (robot) ->
 
   workdaysLunch = ->
     msg = '#PDK 알림# 곧 점심 시간입니다. 식권과 팀원을 챙겨주세요.'
-    #robot.logger.info msg
     robot.send user, msg
 
   getCityAirByAirKorea = (callback) ->
@@ -71,7 +70,7 @@ module.exports = (robot) ->
     robot.send user, msg
 
   weeklyReport = (place) ->
-    msg = "#PDK 알림# 10분 뒤 주간보고 (#{place})입니다. 정시에 체크인해 주세요."
+    msg = "#PDK 알림# 10분 뒤 주간보고 (#{place})입니다."
     robot.send user, msg
 
   robot.logger.info "Initializing CronJob... #{user.room}"
