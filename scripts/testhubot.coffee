@@ -70,6 +70,10 @@ module.exports = (robot) ->
     msg = "#PDK 알림# 10분 뒤 Daily Scrum 시작(#{place})입니다. 정시에 체크인해 주세요."
     robot.send user, msg
 
+  weeklyReport = (place) ->
+    msg = "#PDK 알림# 10분 뒤 주간보고 (#{place})입니다. 정시에 체크인해 주세요."
+    robot.send user, msg
+
   robot.logger.info "Initializing CronJob... #{user.room}"
   require('time')
 
@@ -89,6 +93,9 @@ module.exports = (robot) ->
   #new CronJob('0 20 13 * * 2', ->
   #  workdaysScrum('1019호')
   #, null, true, tz)
+  new CronJob('0 50 10 * * 3', ->
+    weeklyReport('11-2회의실')
+  , null, true, tz)
 
   robot.router.post "/hubot/echo", (req, res) ->
     query = querystring.parse(url.parse(req.url).query)
