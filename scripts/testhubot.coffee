@@ -20,7 +20,7 @@ weather = require('./lib/weather')
 module.exports = (robot) ->
 
   user = {}
-  user.room = process.env.HUBOT_DEPLOY_ROOM || '#tide_notice'
+  user.room = process.env.HUBOT_DEPLOY_ROOM || '#test'
   #user.user = 'leechwin'
   user.type = 'groupchat'
 
@@ -28,7 +28,7 @@ module.exports = (robot) ->
   file = 'scripts/data.json'
 
   workdaysLunch = ->
-    msg = '#TIDE 알림# 곧 점심 시간입니다. 식권과 팀원을 챙겨주세요.'
+    msg = '#PDK 알림# 곧 점심 시간입니다. 식권과 팀원을 챙겨주세요.'
     #robot.logger.info msg
     robot.send user, msg
 
@@ -63,11 +63,11 @@ module.exports = (robot) ->
   workdaysQuit = ->
     getCityAirByAirKorea (cityAir) ->
       weather.getWeatherByPlanet cityAir, (text) ->
-        msg = "#TIDE 알림# 하루 업무를 마무리하고 퇴근 할 시간입니다.\n" + text
+        msg = "#PDK 알림# 하루 업무를 마무리하고 퇴근 할 시간입니다.\n" + text
         robot.send user, msg
 
   workdaysScrum = (place) ->
-    msg = "#TIDE 알림# 10분 뒤 Daily Scrum 시작(#{place})입니다. 정시에 체크인해 주세요."
+    msg = "#PDK 알림# 10분 뒤 Daily Scrum 시작(#{place})입니다. 정시에 체크인해 주세요."
     robot.send user, msg
 
   robot.logger.info "Initializing CronJob... #{user.room}"
@@ -119,7 +119,7 @@ module.exports = (robot) ->
       res.end(msg)
 
   robot.respond //i, (msg) ->
-    msg.send "안녕하세요? TIDE BOT입니다."
+    msg.send "안녕하세요? PDK BOT입니다."
 
   #robot.hear /장소 : (.*) 회의실/i, (msg) ->
   #  msg.send "#Hubot 캠페인# 회의는 간결하게, 회의 시간에는 적극적이고 겸손하게 자신의 의견을 얘기해 주세요~"
@@ -135,7 +135,7 @@ module.exports = (robot) ->
     cronDate.setMinutes cronDate.getMinutes() - beforeMin
     CronJob = require("cron").CronJob
     job = new CronJob(cronDate, ->
-      cronMsg = "#TIDE 알림# 회의 #{beforeMin}분 전입니다.\n" + fullMsg
+      cronMsg = "#PDK 알림# 회의 #{beforeMin}분 전입니다.\n" + fullMsg
       robot.send user, cronMsg
       removeAlarmJob fullMsg
       @stop()
@@ -200,7 +200,7 @@ module.exports = (robot) ->
           cronDate = new Date(obj.time)
           cronDate.setMinutes cronDate.getMinutes() - beforeMin
           job = new CronJob(cronDate, ->
-            cronMsg = "#TIDE 알림# 회의 #{beforeMin}분 전입니다.\n" + obj.msg
+            cronMsg = "#PDK 알림# 회의 #{beforeMin}분 전입니다.\n" + obj.msg
             robot.send user, cronMsg
             removeAlarmJob obj.msg
             @stop()
