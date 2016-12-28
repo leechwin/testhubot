@@ -59,14 +59,8 @@ module.exports = (robot) ->
           finally
             callback msg
 
-  workdaysQuit = ->
-    getCityAirByAirKorea (cityAir) ->
-      weather.getWeatherByPlanet cityAir, (text) ->
-        msg = "#PDK 알림# 하루 업무를 마무리하고 퇴근 할 시간입니다.\n" + text
-        robot.send user, msg
-
   workdaysScrum = (place) ->
-    msg = "#PDK 알림# 10분 뒤 Daily Scrum 시작(#{place})입니다. 정시에 체크인해 주세요."
+    msg = "#PDK 알림# 10분 뒤 일일미팅 (#{place})입니다."
     robot.send user, msg
 
   weeklyReport = (place) ->
@@ -84,14 +78,10 @@ module.exports = (robot) ->
 
   CronJob = require('cron').CronJob
   tz = 'Asia/Seoul'
-  #new CronJob('0 0 18 * * 1-5', workdaysQuit, null, true, tz)
   #new CronJob('0 45 11 * * 1-5', workdaysLunch, null, true, tz)
-  #new CronJob('0 50 10 * * 3-5,1', ->
-  #  workdaysScrum('1019호')
-  #, null, true, tz)
-  #new CronJob('0 20 13 * * 2', ->
-  #  workdaysScrum('1019호')
-  #, null, true, tz)
+  new CronJob('0 20 13 * * 1,3-5', ->
+    workdaysScrum('11-4회의실')
+  , null, true, tz)
   new CronJob('0 50 10 * * 3', ->
     weeklyReport('11-2회의실')
   , null, true, tz)
