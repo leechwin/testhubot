@@ -203,6 +203,12 @@ module.exports = (robot) ->
           , null, true, tz)
   initAlarms()
 
+  http = require('http')
+  setInterval ->
+    http.get 'http://<your app name>.herokuapp.com'
+    return
+  , 300000
+
   # robot.hear /badger/i, (msg) ->
   #   msg.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
   #
