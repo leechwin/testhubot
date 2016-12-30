@@ -1,3 +1,3 @@
 @echo off
 
-npm install && node_modules\.bin\hubot.cmd --name "nbot" %* 
+npm install && node_modules\.bin\hubot.cmd --name "pdkbot" %* 
