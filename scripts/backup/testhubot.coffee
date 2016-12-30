@@ -20,7 +20,7 @@ weather = require('./lib/weather')
 module.exports = (robot) ->
 
   user = {}
-  user.room = process.env.HUBOT_DEPLOY_ROOM || '#test'
+  user.room = process.env.HUBOT_DEPLOY_ROOM || '#notice'
   #user.user = 'leechwin'
   user.type = 'groupchat'
 
@@ -203,7 +203,6 @@ module.exports = (robot) ->
           , null, true, tz)
   initAlarms()
 
-  # hubot heroku keepalive
   http = require('http')
   setInterval ->
     http.get 'http://pdkbot.herokuapp.com/'
