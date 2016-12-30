@@ -205,7 +205,7 @@ module.exports = (robot) ->
 
   http = require('http')
   setInterval ->
-    http.get 'https://pdkbot.herokuapp.com/'
+    http.get 'http://pdkbot.herokuapp.com/'
     return
   , 300000
 
