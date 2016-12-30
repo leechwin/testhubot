@@ -20,7 +20,7 @@ weather = require('./lib/weather')
 module.exports = (robot) ->
 
   user = {}
-  user.room = process.env.HUBOT_DEPLOY_ROOM || '#test'
+  user.room = process.env.HUBOT_DEPLOY_ROOM || '#notice'
   #user.user = 'leechwin'
   user.type = 'groupchat'
 
@@ -117,12 +117,9 @@ module.exports = (robot) ->
   robot.respond //i, (msg) ->
     msg.send "안녕하세요? PDK BOT입니다."
 
-  #robot.hear /장소 : (.*) 회의실/i, (msg) ->
-  #  msg.send "#Hubot 캠페인# 회의는 간결하게, 회의 시간에는 적극적이고 겸손하게 자신의 의견을 얘기해 주세요~"
-
   # "#회의"라는 단어가 포함되어 있으면 해당 메시지에서 시간("yyyy.mm.dd hour:min" 포맷만 인식)을 추출해 알람으로 등록
   robot.hear /#회의(.*)/i, (msg) ->
-    fullMsg = msg.message.rawText
+    fullMsg = msg.message.text
     beforeMin = 30
     time = fullMsg.match(/(\d{4}).(\d{1,2}).(\d{1,2})\s+\d{2}:\d{2}/)[0]
     console.log fullMsg, time
