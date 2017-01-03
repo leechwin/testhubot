@@ -82,7 +82,7 @@ module.exports = (robot) ->
   new CronJob('0 20 13 * * 1,3-5', ->
     workdaysScrum('11-4회의실')
   , null, true, tz)
-  new CronJob('0 50 10 * * 3', ->
+  new CronJob('0 50 10 * * 2', ->
     weeklyReport('11-2회의실')
   , null, true, tz)
 
