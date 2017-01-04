@@ -28,7 +28,7 @@ module.exports = (robot) ->
   file = 'scripts/data.json'
 
   workdaysLunch = ->
-    msg = '#PDK 알림# 곧 점심 시간입니다. 식권과 팀원을 챙겨주세요.'
+    msg = '#IDE 알림# 곧 점심 시간입니다. 식권과 팀원을 챙겨주세요.'
     robot.send user, msg
 
   getCityAirByAirKorea = (callback) ->
@@ -60,11 +60,11 @@ module.exports = (robot) ->
             callback msg
 
   workdaysScrum = (place) ->
-    msg = "#PDK 알림# 10분 뒤 일일미팅 (#{place})입니다."
+    msg = "#IDE 알림# 10분 뒤 일일미팅 (#{place})입니다."
     robot.send user, msg
 
   weeklyReport = (place) ->
-    msg = "#PDK 알림# 10분 뒤 주간보고 (#{place})입니다."
+    msg = "#IDE 알림# 10분 뒤 주간보고 (#{place})입니다."
     robot.send user, msg
 
   robot.logger.info "Initializing CronJob... #{user.room}"
@@ -79,9 +79,9 @@ module.exports = (robot) ->
   CronJob = require('cron').CronJob
   tz = 'Asia/Seoul'
   #new CronJob('0 45 11 * * 1-5', workdaysLunch, null, true, tz)
-  new CronJob('0 20 13 * * 1-5', ->
-    workdaysScrum('11-4회의실')
-  , null, true, tz)
+  #new CronJob('0 20 13 * * 1-5', ->
+  #  workdaysScrum('11-4회의실')
+  #, null, true, tz)
   #new CronJob('0 50 10 * * 2', ->
   #  weeklyReport('11-2회의실')
   #, null, true, tz)
@@ -115,7 +115,7 @@ module.exports = (robot) ->
       res.end(msg)
 
   robot.respond //i, (msg) ->
-    msg.send "안녕하세요? PDK BOT입니다."
+    msg.send "안녕하세요? IDE BOT입니다."
 
   # "#회의"라는 단어가 포함되어 있으면 해당 메시지에서 시간("yyyy.mm.dd hour:min" 포맷만 인식)을 추출해 알람으로 등록
   robot.hear /#회의(.*)/i, (msg) ->
@@ -128,7 +128,7 @@ module.exports = (robot) ->
     cronDate.setMinutes cronDate.getMinutes() - beforeMin
     CronJob = require("cron").CronJob
     job = new CronJob(cronDate, ->
-      cronMsg = "#PDK 알림# 회의 #{beforeMin}분 전입니다.\n" + fullMsg
+      cronMsg = "#IDE 알림# 회의 #{beforeMin}분 전입니다.\n" + fullMsg
       robot.send user, cronMsg
       removeAlarmJob fullMsg
       @stop()
@@ -193,7 +193,7 @@ module.exports = (robot) ->
           cronDate = new Date(obj.time)
           cronDate.setMinutes cronDate.getMinutes() - beforeMin
           job = new CronJob(cronDate, ->
-            cronMsg = "#PDK 알림# 회의 #{beforeMin}분 전입니다.\n" + obj.msg
+            cronMsg = "#IDE 알림# 회의 #{beforeMin}분 전입니다.\n" + obj.msg
             robot.send user, cronMsg
             removeAlarmJob obj.msg
             @stop()
@@ -203,7 +203,7 @@ module.exports = (robot) ->
   # hubot heroku keepalive
   http = require('http')
   setInterval ->
-    http.get 'http://pdkbot.herokuapp.com/'
+    http.get 'http://idebot.herokuapp.com/'
     return
   , 300000
 

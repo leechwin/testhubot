@@ -1,9 +1,9 @@
 {
-  "name": "pdkbot",
+  "name": "idebot",
   "version": "0.0.1",
   "private": true,
   "author": "ChangHyun Lee <leechwin1@gmail.com>",
-  "description": "PDK BOT",
+  "description": "IDE BOT",
   "dependencies": {
     "hubot": "^2.19.0",
     "hubot-diagnostics": "0.0.1",
